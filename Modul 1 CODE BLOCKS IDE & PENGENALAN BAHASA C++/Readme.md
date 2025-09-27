@@ -217,23 +217,27 @@ Program ini dirancang untuk membaca satu karakter saja. Walaupun kamu mengetik "
 using namespace std;
 
 int main() {
-   float a, b;
-   cout << "masukkan angka : ";
-   cin >> a;
-   cout << "masukkan angka : ";
-   cin >> b;
-   cout << "penjumlahan : " << a + b << endl;
-   cout << "pengurangan : " << a - b << endl;
-   cout << "perkalian : " << a * b << endl;
-   cout << "pembagian : " << a / b << endl;
 
-    return 0;
+  float angka1, angka2;
+
+  cout << "Masukkan angka pertama: ";
+  cin >> angka1;
+
+  cout << "Masukkan angka kedua: ";
+  cin >> angka2;
+
+  cout << "Penjumlahan : " << angka1 + angka2 << endl;
+  cout << "Pengurangan : " << angka1 - angka2 << endl;
+  cout << "Perkalian   : " << angka1 * angka2 << endl;
+  cout << "Pembagian   : " << angka1 / angka2 << endl;
+
+  return 0;
 }
 ```
 
 > Output
 > 
-> ![Screenshot bagian x](OUTPUT/Soal1.png)
+> ![Screenshot bagian x](OUTPUT/unguided1.png)
 
 Program ini seperti kalkulator dasar. Kamu memasukkan dua angka, lalu program akan otomatis melakukan empat operasi matematika dasar:
 Penjumlahan (+), Pengurangan (-), Perkalian (*), Pembagian (/), Hasil dari setiap operasi kemudian ditampilkan di layar. Program aritmatika.png juga melakukan hal serupa, yaitu menghitung nilai menggunakan operasi matematika dan menampilkan hasilnya.
@@ -248,32 +252,41 @@ Penjumlahan (+), Pengurangan (-), Perkalian (*), Pembagian (/), Hasil dari setia
 
 using namespace std;
 
+string ubahKeTeks(int nomor) {
+    string satuan[] = {"", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan"};
+
+    if (nomor < 0 || nomor > 100) {
+        return "Input tidak valid. Harap masukkan angka antara 0 dan 100.";
+    }
+
+    if (nomor == 0) return "nol";
+    if (nomor == 100) return "seratus";
+    if (nomor == 10) return "sepuluh";
+    if (nomor == 11) return "sebelas";
+
+    if (nomor < 10) {
+        return satuan[nomor];
+    } else if (nomor < 20) {
+        return satuan[nomor % 10] + " belas";
+    } else {
+        int puluhan = nomor / 10;
+        int sisa = nomor % 10;
+
+        string hasil = satuan[puluhan] + " puluh";
+        if (sisa > 0) {
+            hasil += " " + satuan[sisa];
+        }
+        return hasil;
+    }
+}
+
 int main() {
     int angka;
-    string tulisan = "";
-
     cout << "Masukkan angka (0-100): ";
     cin >> angka;
 
-    string satuan[] = {"", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan"};
-
-    if (angka < 0 || angka > 100) {
-        tulisan = "Input tidak valid. Harap masukkan angka antara 0 dan 100.";
-    } else if (angka == 0) {
-        tulisan = "nol";
-    } else if (angka == 100) {
-        tulisan = "seratus";
-    } else if (angka == 11) {
-        tulisan = "sebelas";
-    } else if (angka < 10) {
-        tulisan = satuan[angka];
-    } else if (angka < 20) {
-        tulisan = satuan[angka % 10] + " belas";
-    } else {
-        int puluhan = angka / 10;
-        int sisa = angka % 10;
-        tulisan = satuan[puluhan] + " puluh " + satuan[sisa];
-    }
+    // Memanggil fungsi untuk melakukan konversi
+    string tulisan = ubahKeTeks(angka);
 
     cout << "Output: " << angka << " : " << tulisan << endl;
 
@@ -283,7 +296,7 @@ int main() {
 
 > Output
 > 
-> ![Screenshot bagian x](OUTPUT/Soal2.png)
+> ![Screenshot bagian x](OUTPUT/unguided2.png)
 
 Ini adalah program penerjemah angka menjadi tulisan. Kamu memasukkan sebuah angka (contohnya 79), dan program akan mengubahnya menjadi format teks dalam bahasa Indonesia, yaitu "tujuh puluh sembilan".
 
@@ -302,15 +315,16 @@ int main() {
     cin >> n;
     cout << "Output:" << endl;
 
-    for (int i = n; i >= 1; i--) {
-        for (int k = 0; k < n - i; k++) {
+    for (int baris = 0; baris < n; baris++) {
+        for (int spasi = 0; spasi < baris; spasi++) {
             cout << "  ";
         }
-        for (int j = i; j >= 1; j--) {
+        int angka_maks = n - baris;
+        for (int j = angka_maks; j >= 1; j--) {
             cout << j << " ";
         }
         cout << "* ";
-        for (int j = 1; j <= i; j++) {
+        for (int j = 1; j <= angka_maks; j++) {
             cout << j << " ";
         }
         cout << endl;
@@ -326,7 +340,7 @@ int main() {
 
 > Output
 > 
-> ![Screenshot bagian x](OUTPUT/Soal3.png)
+> ![Screenshot bagian x](OUTPUT/unguided3.png)
 
 Program ini adalah contoh kreativitas menggunakan perulangan bersarang (nested loop). Kamu memasukkan satu angka, dan program akan menggunakan angka tersebut sebagai titik awal untuk menggambar pola segitiga simetris yang unik menggunakan angka dan simbol bintang *.
 
