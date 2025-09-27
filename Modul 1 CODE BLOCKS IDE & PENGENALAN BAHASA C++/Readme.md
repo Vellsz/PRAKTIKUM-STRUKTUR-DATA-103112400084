@@ -285,10 +285,7 @@ int main() {
     int angka;
     cout << "Masukkan angka (0-100): ";
     cin >> angka;
-
-    // Memanggil fungsi untuk melakukan konversi
     string tulisan = ubahKeTeks(angka);
-
     cout << "Output: " << angka << " : " << tulisan << endl;
 
     return 0;
