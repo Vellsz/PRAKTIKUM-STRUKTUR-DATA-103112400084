@@ -27,7 +27,7 @@ int main()
 > 
 > ![Screenshot bagian x](OUTPUT/aritmatika.png)
 
-Program ini bersifat non-interaktif atau statis. Tidak meminta input: Program ini langsung berjalan tanpa memintamu memasukkan angka apa pun. Perhitungan sudah ditentukan Operasi matematikanya (misalnya, z = 5 - 3;) sudah tertulis di dalam kode. Nilainya sudah pasti dan tidak bisa diubah saat program berjalan. Tujuannya biasanya untuk mendemonstrasikan sebuah perhitungan spesifik atau untuk mendapatkan hasil dari sebuah rumus yang nilainya sudah diketahui. Singkatnya, program ini menjalankan perhitungan yang sudah ditetapkan dari awal dan hanya menampilkan hasilnya.
+Program ini mendemonstrasikan operasi matematika yang paling mendasar dalam C++. Output yang terlihat, Nilai z = 2, mengindikasikan bahwa program telah melakukan sebuah proses kalkulasi, seperti pengurangan atau penjumlahan, dan menyimpan hasilnya ke dalam sebuah variabel bernama z. Teks dan nilai ini kemudian ditampilkan ke konsol menggunakan perintah cout, yang secara efektif mengkomunikasikan hasil akhir dari perhitungan internal program kepada pengguna.
 
 ### Fungsi
 ```c++
@@ -85,7 +85,9 @@ int main()
 > 
 > ![Screenshot bagian x](OUTPUT/fungsi.png)
 
-Program ini bertugas untuk menghitung luas dan keliling persegi panjang. Kamu hanya perlu memasukkan nilai panjang dan lebar. Program ini menggunakan "fungsi" terpisah untuk masing-masing perhitungan, sehingga kodenya lebih rapi dan terstruktur.
+Tentu, ini penjelasannya dalam format paragraf untuk setiap program.
+
+Program ini mengilustrasikan kekuatan fungsi untuk mengorganisir kode ke dalam blok-blok yang logis dan dapat digunakan kembali. Setelah menerima input panjang 6 dan lebar 8, program menghitung luas dan keliling persegi panjang. Output yang ditampilkan dalam dua bagian—satu yang secara eksplisit menyatakan "Dihitung dengan fungsi" dan satu lagi sebagai "Hasil Perhitungan"—menegaskan bahwa kalkulasi (Luas 48 dan Keliling 28) dilakukan oleh fungsi terpisah yang dipanggil dari program utama.
 
 ### Kondisi
 ```c++
@@ -120,7 +122,7 @@ int main()
 > 
 > ![Screenshot bagian x](OUTPUT/kondisi.png)
 
-Program ini adalah penentu hari kerja atau hari libur. Kamu memasukkan angka yang mewakili hari (misalnya 1 untuk Senin, 6 untuk Sabtu). Program kemudian akan menggunakan logika if-else atau switch untuk memeriksa angka tersebut dan memberimu output "Hari Kerja" atau "Hari Libur" sesuai aturan yang ditentukan.
+Program ini merupakan contoh implementasi logika percabangan yang memungkinkan program untuk memberikan respons berbeda tergantung pada input pengguna. Berdasarkan dua output yang ditampilkan, program ini dirancang untuk membedakan antara hari kerja dan hari libur. Ketika pengguna memasukkan angka 4, program mengevaluasinya dan mencetak "Hari Kerja", sedangkan input 7 menghasilkan output "Hari Libur". Ini menunjukkan adanya struktur kondisional, seperti if-else atau switch, yang memandu alur program ke jalur yang sesuai berdasarkan aturan yang telah ditetapkan.
 
 ### Perulangan
 ```c++
@@ -142,7 +144,7 @@ int main()
 > 
 > ![Screenshot bagian x](OUTPUT/perulangan.png)
 
-Program ini menunjukkan cara kerja perulangan (looping). Kamu memasukkan sebuah angka (misalnya 5), dan program akan mencetak sebuah kalimat berulang kali, dari angka 2 sampai angka yang kamu masukkan. Ini berguna untuk melakukan tugas yang sama berkali-kali secara otomatis.
+Output dari program ini adalah hasil dari sebuah struktur perulangan yang mengeksekusi blok kode secara berulang. Tampilan teks "bahlil ke-" yang diikuti oleh angka berurutan dari 2 hingga 6 secara jelas menunjukkan bahwa sebuah loop (kemungkinan besar for loop) telah diinstruksikan untuk berjalan sebanyak lima kali. Loop ini menggunakan sebuah variabel iterator yang nilainya dimulai dari 2, bertambah satu di setiap putaran, dan berhenti ketika nilainya telah mencapai 6.
 
 ### Struct
 ```c++
@@ -183,7 +185,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/struct.png)
 
-Program ini berfungsi seperti formulir digital untuk data mahasiswa. Kamu akan diminta mengisi: Nama, NIM, IPK, Data tersebut kemudian disimpan dalam sebuah struct, yaitu sebuah "wadah" yang bisa menampung berbagai jenis data yang saling berhubungan. Setelah diisi, program akan menampilkan kembali data yang sudah kamu masukkan.
+Program ini menunjukkan penggunaan struct untuk menggabungkan beberapa tipe data yang berbeda ke dalam satu unit logis. Tujuannya adalah untuk merepresentasikan data seorang mahasiswa secara utuh. Program terlebih dahulu meminta input untuk setiap elemen data—Nama, NIM, dan IPK—lalu menyimpannya dalam satu variabel struct. Setelah semua data terkumpul, program kembali mengakses variabel tersebut untuk menampilkan informasi lengkap mahasiswa secara terstruktur, membuktikan efisiensi struct dalam mengelola data yang saling terkait.
 
 ### Test
 ```c++
@@ -204,7 +206,7 @@ int main()
 > 
 > ![Screenshot bagian x](OUTPUT/testcpp.png)
 
-Program ini dirancang untuk membaca satu karakter saja. Walaupun kamu mengetik "Kelapa Muda", program hanya akan mengambil dan menampilkan huruf pertamanya, yaitu 'K'. Ini menunjukkan cara kerja input dasar untuk tipe data karakter (char) di C++
+Program ini adalah demonstrasi sederhana tentang bagaimana C++ menangani input karakter tunggal. Meskipun pengguna mengetikkan kata "Hujan" secara lengkap, program hanya menangkap dan menampilkan karakter pertama, yaitu "H". Hal ini terjadi karena variabel penampung input kemungkinan besar dideklarasikan dengan tipe data char, yang secara desain hanya mampu menyimpan satu karakter. Akibatnya, cin membaca karakter pertama dari aliran input dan mengabaikan sisanya.
 
 ## Unguided
 
@@ -239,8 +241,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1.png)
 
-Program ini seperti kalkulator dasar. Kamu memasukkan dua angka, lalu program akan otomatis melakukan empat operasi matematika dasar:
-Penjumlahan (+), Pengurangan (-), Perkalian (*), Pembagian (/), Hasil dari setiap operasi kemudian ditampilkan di layar. Program aritmatika.png juga melakukan hal serupa, yaitu menghitung nilai menggunakan operasi matematika dan menampilkan hasilnya.
+Program ini berfungsi sebagai kalkulator dasar yang melakukan empat operasi matematika utama secara sekuensial. Setelah pengguna memasukkan dua angka yang sama, yaitu 4, program mengeksekusi penjumlahan (4+4=8), pengurangan (4-4=0), perkalian (4*4=16), dan pembagian (4/4=1). Setiap hasil perhitungan langsung dicetak ke layar, memberikan contoh langsung dari penerapan operator aritmatika dalam sebuah program.
 
 ### Soal 2
 
@@ -298,7 +299,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-Ini adalah program penerjemah angka menjadi tulisan. Kamu memasukkan sebuah angka (contohnya 79), dan program akan mengubahnya menjadi format teks dalam bahasa Indonesia, yaitu "tujuh puluh sembilan".
+Program ini menunjukkan contoh algoritma yang lebih kompleks untuk mengubah representasi numerik menjadi bentuk tekstual atau terbilang. Ketika menerima input angka 79, program secara cerdas memisahkannya menjadi komponen puluhan dan satuan. Dengan menggunakan logika internal, kemungkinan melalui operator pembagian dan modulo, program menerjemahkan 7 menjadi "tujuh" dan 9 menjadi "sembilan", lalu menggabungkannya dengan kata "puluh" untuk menghasilkan output yang benar: "tujuh puluh sembilan".
 
 ### Soal 3
 
@@ -342,9 +343,9 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided3.png)
 
-Program ini adalah contoh kreativitas menggunakan perulangan bersarang (nested loop). Kamu memasukkan satu angka, dan program akan menggunakan angka tersebut sebagai titik awal untuk menggambar pola segitiga simetris yang unik menggunakan angka dan simbol bintang *.
+Output dari program ini adalah visualisasi dari kekuatan perulangan bersarang (nested loops) untuk menciptakan pola yang kompleks dan terstruktur. Berdasarkan input 3, program membangun piramida angka terbalik yang simetris. Ini dicapai melalui beberapa loop yang bekerja sama: satu loop luar untuk mengontrol setiap baris, dan beberapa loop di dalamnya yang bertugas untuk mencetak spasi untuk perataan, urutan angka menurun, simbol bintang di tengah, dan urutan angka menaik, yang secara kolektif membentuk pola yang presisi.
 
 ## Referensi
 
-1. https://www.learncpp.com/ (diakses pada 27 september 2025)
-2. https://www.w3schools.com/cpp/ (diakses pada 27 september 2025)
+1. https://www.programiz.com/cpp-programming (diakses pada 27 september 2025)
+2. https://www.learncpp.com/ (diakses pada 27 september 2025)
