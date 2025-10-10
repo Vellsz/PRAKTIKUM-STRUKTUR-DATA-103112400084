@@ -2,11 +2,11 @@
 <p align="center">NUFAIL ALAUDDIN TSAQIF - 103112400084</p>
 
 ## Dasar Teori
-Abstract Data Type (ADT) adalah sebuah model matematis yang mendefinisikan sebuah tipe data beserta sekumpulan operasi dasar (primitif) terhadap tipe tersebut, tanpa mengungkap bagaimana tipe data tersebut diimplementasikan. Konsep ini memungkinkan pemisahan antara spesifikasi (apa yang dilakukan oleh tipe data) dan implementasi (bagaimana hal itu dilakukan), yang merupakan prinsip dasar dalam rekayasa perangkat lunak. ADT bersifat statik, artinya definisinya ditentukan pada saat kompilasi dan tidak berubah selama eksekusi program. Sebuah ADT bahkan dapat tersusun dari ADT lainnya, misalnya ADT Waktu yang terdiri dari ADT Jam dan ADT Tanggal
+Abstract Data Type (ADT) adalah model konseptual atau teoretis dalam ilmu komputer yang mendefinisikan sebuah tipe data berdasarkan kumpulan nilai yang dapat dimiliki dan kumpulan operasi yang dapat dilakukan terhadap nilai tersebut. Hal yang paling fundamental dari ADT adalah pemisahan antara spesifikasi (apa yang dilakukan oleh tipe data) dan implementasi (bagaimana hal itu dilakukan). Dengan kata lain, ADT berfokus pada perilaku sebuah tipe data dari sudut pandang pengguna, tanpa perlu mengetahui detail internal cara kerja atau bagaimana data tersebut disimpan dalam memori.
 
-Operasi-operasi dasar atau primitif pada ADT dikelompokkan ke dalam beberapa kategori. Konstruktor atau kreator berfungsi untuk menciptakan atau membentuk nilai dari tipe ADT tersebut. Selektor digunakan untuk mengakses komponen-komponen dari tipe data. Selain itu, terdapat juga operator relasional untuk perbandingan (seperti lebih besar dari, sama dengan) , operator aritmatika untuk operasi hitung , prosedur I/O untuk interaksi dengan perangkat masukan/keluaran , serta destruktor untuk melepaskan memori yang digunakan oleh objek ADT.
+Prinsip utamanya adalah abstraksi, yang menyembunyikan kompleksitas dan detail implementasi. Analogi yang sering digunakan adalah sebuah mobil. Sebagai pengemudi, Anda berinteraksi dengan mobil melalui antarmuka yang jelas seperti setir, pedal gas, dan rem. Anda tahu operasi apa yang bisa dilakukan (berbelok, mempercepat, berhenti), tetapi Anda tidak perlu tahu bagaimana mesin pembakaran internal atau sistem rem hidrolik bekerja di baliknya. Antarmuka tersebut adalah spesifikasi ADT, sementara mesin dan komponen internalnya adalah implementasi yang tersembunyi.
 
-Dalam implementasinya menggunakan bahasa C++, konsep ADT biasanya diwujudkan dengan memisahkan kode ke dalam dua jenis file utama. File pertama adalah header file dengan ekstensi .h, yang berisi definisi atau spesifikasi tipe data (umumnya menggunakan struct atau class) beserta deklarasi header dari fungsi-fungsi primitifnya. File kedua adalah source file dengan ekstensi .cpp, yang berisi kode program atau realisasi dari setiap fungsi primitif yang telah dideklarasikan di file header. File utama program (misalnya, main.cpp) kemudian dapat menggunakan ADT tersebut dengan menyertakan file header-nya (#include "namafile.h").
+Dalam praktik pemrograman, konsep ADT ini sering diwujudkan menggunakan class dalam paradigma pemrograman berorientasi objek (OOP). Di dalam sebuah class, member variables (atribut) yang menyimpan data biasanya dijadikan private (implementasi yang tersembunyi), sedangkan member functions (metode) yang mendefinisikan operasi yang valid dijadikan public (antarmuka yang dapat diakses pengguna). Pendekatan ini disebut enkapsulasi. Penggunaan ADT memungkinkan kode menjadi lebih modular, mudah dipelihara, dan dapat digunakan kembali (reusable), karena perubahan pada detail implementasi tidak akan memengaruhi bagian lain dari program selama antarmukanya tetap konsisten.
 
 ## Guided
 
@@ -23,7 +23,6 @@ void inputMhs(mahasiswa &m);
 float rata2(mahasiswa m);
 #endif
 ```
-Program ini adalah sebuah file header yang fungsinya adalah untuk mendeklarasikan komponen-komponen yang akan digunakan bersama oleh file-file .cpp lainnya. Di dalamnya, Anda mendefinisikan sebuah tipe data struct baru bernama mahasiswa yang mengelompokkan tiga variabel: nim, nilai1, dan nilai2. Selain itu, file ini juga berisi prototipe fungsi untuk inputMhs dan rata2. Prototipe ini memberitahu kompiler tentang nama fungsi, tipe data yang dikembalikan (return type), dan parameter yang dibutuhkannya, tanpa menjelaskan isi atau logika dari fungsi tersebut. Tujuannya adalah agar file lain yang menyertakan (#include) header ini tahu cara menggunakan struct mahasiswa dan fungsi-fungsi tersebut.
 
 ### mahasiswa.cpp
 ```c++
@@ -38,7 +37,6 @@ void inputMhs(mahasiswa &m);
 float rata2(mahasiswa m);
 #endif
 ```
-Program ni adalah file sumber (source file) yang berisi definisi atau implementasi kode dari fungsi-fungsi yang sebelumnya hanya dideklarasikan di mahasiswa.h. Di sinilah logika sebenarnya ditulis. Kode untuk fungsi inputMhs ditulis secara lengkap, yaitu bagaimana cara menampilkan teks ke layar menggunakan cout dan menerima masukan dari pengguna menggunakan cin. Begitu pula dengan fungsi rata2, di mana kode untuk proses aritmetika penjumlahan dan pembagian untuk menghitung nilai rata-rata ditulis secara rinci. File ini secara efektif menyediakan kode yang akan dieksekusi saat fungsi-fungsi tersebut dipanggil.
 
 ### main.cpp
 ```c++
@@ -58,7 +56,7 @@ int main()
 > 
 > ![Screenshot bagian x](OUTPUT/guided1.png)
 
-ini berisi fungsi main, yang merupakan titik masuk (entry point) dari keseluruhan program. Eksekusi kode selalu dimulai dari sini. Program ini menginstansiasi atau menciptakan sebuah variabel bernama mhs dari tipe struct mahasiswa. Selanjutnya, ia mengatur alur program dengan memanggil fungsi inputMhs untuk mengisi data ke dalam variabel mhs, kemudian memanggil fungsi rata2 untuk memproses data tersebut, dan terakhir menggunakan cout untuk menampilkan hasil akhir ke konsol. File ini bertugas menggunakan semua komponen yang telah dideklarasikan dan didefinisikan di file lain untuk menjalankan alur program yang spesifik dan mencapai tujuan akhir.
+Program ini adalah aplikasi C++ sederhana yang terstruktur dalam tiga file untuk mengelola data seorang mahasiswa. File header mahasiswa.h mendefinisikan struct untuk menyimpan NIM dan dua nilai beserta deklarasi fungsinya, sementara mahasiswa.cpp berisi logika untuk menginput data dan menghitung rata-rata. Alur programnya sendiri dikontrol dari main.cpp, di mana sebuah variabel mahasiswa dibuat, lalu diisi dengan data dari pengguna melalui fungsi inputMhs, dan akhirnya nilai rata-ratanya dihitung menggunakan fungsi rata2 sebelum hasilnya ditampilkan ke layar.
 
 ## Unguided
 
@@ -176,7 +174,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1ifx.png)
 
-Program ini berfungsi sebagai sistem sederhana untuk mendata nilai mahasiswa. Kodenya menggunakan sebuah struct atau class untuk merepresentasikan data setiap mahasiswa, yang mencakup nama, NIM, serta nilai UTS, UAS, dan Tugas. Saat dijalankan, program masuk ke dalam sebuah loop yang memungkinkan pengguna memasukkan data untuk satu atau lebih mahasiswa. Setelah data diinput, sebuah fungsi dipanggil untuk menghitung Nilai Akhir berdasarkan rumus tertentu. Seperti yang terlihat pada output, setelah pengguna selesai memasukkan data untuk "Reyhan Aretha" dan memilih untuk tidak melanjutkan (n), program kemudian menampilkan kembali data lengkap mahasiswa tersebut beserta hasil kalkulasi Nilai Akhirnya, yaitu 90.7.
+Program ini merupakan aplikasi C++ untuk mengelola data nilai mahasiswa yang kodenya diorganisir ke dalam tiga file terpisah. File header unguided1.h mendefinisikan struktur (struct) Mahasiswa yang berisi data seperti nama, NIM, dan nilai-nilai ujian. File implementasi unguided1.cpp berisi logika dari fungsi-fungsi yang dideklarasikan di header, seperti fungsi untuk menginput data dan fungsi untuk menghitung nilai akhir secara otomatis berdasarkan bobot nilai UTS, UAS, dan tugas. Terakhir, file main.cpp bertindak sebagai program utama yang mengontrol alur, yaitu dengan membuat sebuah array untuk menampung hingga 10 mahasiswa, kemudian secara berulang meminta input data pengguna hingga selesai, dan akhirnya menampilkan kembali seluruh data mahasiswa yang tersimpan beserta hasil nilai akhirnya ke layar.
 
 ### Soal 2
 
@@ -237,7 +235,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-Program ini merupakan contoh sederhana dari pembuatan dan penampilan sebuah objek data. Kode ini mendefinisikan sebuah struct atau class untuk "Pelajaran" yang memiliki dua atribut: nama pelajaran dan kode pelajaran. Pada fungsi main, program secara langsung membuat sebuah objek "Pelajaran" dan menginisialisasinya dengan nilai "Struktur Data" dan "STD" tanpa meminta input dari pengguna. Setelah objek berhasil dibuat, program memanggil sebuah fungsi untuk menampilkannya. Output yang dihasilkan sesuai dengan proses tersebut, yaitu hanya menampilkan dua baris informasi dari objek yang telah dibuat secara hardcoded.
+Program C++ ini didesain secara prosedural untuk mengelola data mata pelajaran dan kodenya diorganisir ke dalam tiga file terpisah. File header (unguided2.h) mendefinisikan sebuah struct bernama Pelajaran untuk membungkus data nama dan kode mata pelajaran. File implementasi (unguided2.cpp) berisi logika dari dua fungsi: create_pelajaran yang bertugas membuat sebuah struct Pelajaran baru, dan tampil_pelajaran yang berfungsi untuk menampilkannya ke layar. Alur program utama pada main.cpp kemudian memanggil fungsi create_pelajaran untuk membuat data pelajaran "Struktur Data", lalu hasilnya dilewatkan ke fungsi tampil_pelajaran untuk dicetak ke konsol.
 
 ### Soal 3
 
@@ -350,10 +348,10 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided3.png)
 
-Program ini mendemonstrasikan dua konsep utama: pertukaran elemen antar-array 2D (matriks) dan pertukaran nilai melalui pointer. Kode ini pertama-tama membuat dan menampilkan dua matriks 3x3, yaitu Matriks A dan B. Kemudian, sebuah fungsi dipanggil untuk menukar elemen pada posisi tengah ([1][1]) dari kedua matriks tersebut, yang terlihat dari output di mana nilai 5 (dari A) dan 50 (dari B) saling bertukar posisi. Bagian kedua program menunjukkan cara kerja fungsi yang menerima dua pointer. Fungsi ini menukar nilai yang ditunjuk oleh pointer tersebut, bukan alamat pointernya. Hal ini terbukti pada output terakhir, di mana nilai variabel yang awalnya 100 dan 200 berhasil ditukar menjadi 200 dan 100.
+Program C++ ini didesain secara prosedural untuk mendemonstrasikan operasi pada array dua dimensi (matriks) dan pointer, dengan kodenya yang terorganisir ke dalam tiga file terpisah. File header unguided3.h mendeklarasikan tiga fungsi, yang kemudian diimplementasikan dalam unguided3.cpp untuk menampilkan matriks, menukar elemen tertentu di antara dua matriks, dan menukar nilai yang ditunjuk oleh dua pointer. Program utama di main.cpp menginisialisasi dua matriks 3x3 dan dua variabel integer, kemudian memanggil fungsi-fungsi tersebut untuk menampilkan data awal, menukar sebuah elemen antar matriks dan nilai antar variabel pointer, lalu menampilkan hasilnya setelah pertukaran.
 
 ## Referensi
 
-1. PGeeksforGeeks - Abstract Data Types: https://www.geeksforgeeks.org/abstract-data-types/ (diakses pada 9 Oktober 2025)
-2. University of Waterloo - Abstract Data Types (ADT): https://cs.uwaterloo.ca/~a23gao/cs136_s21/notes/10-adt.pdf (diakses pada 9 Oktober 2025)
-3. TutorialsPoint - Data Structures - Abstract Data Types: https://www.tutorialspoint.com/data_structures_algorithms/abstract_data_type.htm (diakses pada 9 Oktober 2025)
+1. https://www.geeksforgeeks.org/abstract-data-types/ (diakses pada 9 Oktober 2025)
+2. https://www.tutorialspoint.com/data_structures_algorithms/abstract_data_type.htm (diakses pada 9 Oktober 2025)
+3. https://www.programiz.com/dsa/abstract-data-type (diakses pada 9 Oktober 2025)
