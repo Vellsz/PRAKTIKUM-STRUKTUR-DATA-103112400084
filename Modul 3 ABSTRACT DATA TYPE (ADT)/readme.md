@@ -54,7 +54,7 @@ int main()
 ```
 > Output
 > 
-> ![Screenshot bagian x](OUTPUT/guided1.png)
+> ![Screenshot bagian x](OUTPUT/guided.png)
 
 Program ini adalah aplikasi C++ sederhana yang terstruktur dalam tiga file untuk mengelola data seorang mahasiswa. File header mahasiswa.h mendefinisikan struct untuk menyimpan NIM dan dua nilai beserta deklarasi fungsinya, sementara mahasiswa.cpp berisi logika untuk menginput data dan menghitung rata-rata. Alur programnya sendiri dikontrol dari main.cpp, di mana sebuah variabel mahasiswa dibuat, lalu diisi dengan data dari pengguna melalui fungsi inputMhs, dan akhirnya nilai rata-ratanya dihitung menggunakan fungsi rata2 sebelum hasilnya ditampilkan ke layar.
 
@@ -172,7 +172,7 @@ int main() {
 ```
 > Output
 > 
-> ![Screenshot bagian x](OUTPUT/unguided1ifx.png)
+> ![Screenshot bagian x](OUTPUT/unguided1.png)
 
 Program ini merupakan aplikasi C++ untuk mengelola data nilai mahasiswa yang kodenya diorganisir ke dalam tiga file terpisah. File header unguided1.h mendefinisikan struktur (struct) Mahasiswa yang berisi data seperti nama, NIM, dan nilai-nilai ujian. File implementasi unguided1.cpp berisi logika dari fungsi-fungsi yang dideklarasikan di header, seperti fungsi untuk menginput data dan fungsi untuk menghitung nilai akhir secara otomatis berdasarkan bobot nilai UTS, UAS, dan tugas. Terakhir, file main.cpp bertindak sebagai program utama yang mengontrol alur, yaitu dengan membuat sebuah array untuk menampung hingga 10 mahasiswa, kemudian secara berulang meminta input data pengguna hingga selesai, dan akhirnya menampilkan kembali seluruh data mahasiswa yang tersimpan beserta hasil nilai akhirnya ke layar.
 
