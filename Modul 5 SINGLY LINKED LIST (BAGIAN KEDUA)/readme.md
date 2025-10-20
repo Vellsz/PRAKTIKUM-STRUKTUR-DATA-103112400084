@@ -659,4 +659,4 @@ Fungsi pencarian (cariBuku) pada program ini memberikan pengguna tiga pilihan kr
 
 1. https://www.geeksforgeeks.org/cpp/cpp-program-for-searching-an-element-in-a-linked-list/ (diakses pada 20 Oktober 2025)
 2. https://www.tutorialspoint.com/searching-an-element-in-a-linked-list-using-cplusplus (diakses pada 20 Oktober 2025)
-3. https://www.programiz.com/dsa/linear-search (diakses pada 18 Oktober 2025)
+3. https://www.programiz.com/dsa/linear-search (diakses pada 20 Oktober 2025)
