@@ -1,12 +1,10 @@
 # <h1 align="center">Laporan Praktikum Modul 5 <br> SINGLY LINKED LIST (BAGIAN KEDUA)</h1>
-<p align="center">MOHAMMAD REYHAN ARETHA FATIN - 103112400078</p>
+<p align="center">NUFAIL ALAUDDIN TSAQIF - 103112400084</p>
 
 ## Dasar Teori
-Singly Linked List adalah struktur data yang terdiri dari kumpulan elemen (struct elmlist)  yang saling terhubung menggunakan pointer. Setiap elemen memiliki dua bagian: infotype (didefinisikan sebagai int ) untuk menyimpan data, dan pointer next yang menunjuk ke elemen berikutnya. List itu sendiri memiliki penanda awal bernama first, dan list dianggap kosong jika first bernilai Nil (atau NULL). Salah satu operasi dasar yang ditekankan dalam modul adalah searching (pencarian), yang didefinisikan sebagai proses mengunjungi setiap node secara berurutan dan berhenti ketika node yang dicari telah ditemukan. Operasi pencarian ini sangat penting karena menjadi fondasi untuk mempermudah implementasi operasi lain seperti insertAfter dan deleteAfter.
+Singly Linked List (SLL) adalah struktur data linear dinamis yang terdiri dari sekumpulan elemen yang disebut node. Setiap node dalam SLL secara fundamental memiliki dua bagian: sebuah infotype yang menyimpan data aktual, dan sebuah pointer (next) yang menyimpan alamat memori dari node berikutnya dalam urutan. Keseluruhan struktur list ini diidentifikasi oleh satu pointer kepala, yang biasa disebut first atau head, yang menunjuk ke node pertama. Jika pointer first ini bernilai Nil (atau NULL), maka list tersebut dianggap kosong. Berbeda dengan array, node-node dalam linked list tidak disimpan secara berurutan (kontigu) di memori, melainkan terhubung secara logis melalui pointer.
 
-Metode pencarian yang dijelaskan ini mengunjungi setiap node satu per satu dari awal secara formal dikenal sebagai Linear Search (Pencarian Linier) atau Sequential Search (Pencarian Berurutan). Keunggulan utamanya adalah kesederhanaan implementasi dan fakta bahwa data list tidak perlu diurutkan terlebih dahulu. Namun, kelemahannya terletak pada efisiensi waktu. Dalam skenario terburuk, algoritma ini harus mengunjungi seluruh $n$ elemen, sehingga memiliki kompleksitas waktu O(n).
-
-Sebagai perbandingan, terdapat algoritma Binary Search (Pencarian Biner) yang jauh lebih efisien dengan kompleksitas waktu O(log n). Algoritma ini bekerja dengan membagi kumpulan data menjadi dua bagian secara berulang dan hanya melanjutkan pencarian di separuh bagian yang relevan. Akan tetapi, binary search memiliki syarat mutlak: data harus sudah dalam keadaan terurut (sorted) dan struktur datanya harus mendukung random access (kemampuan mengakses elemen mana pun secara langsung, seperti array). Karena singly linked list tidak mendukung random access untuk mencapai node ke-i, kita harus selalu mulai dari first maka binary search tidak dapat diimplementasikan secara efisien pada struktur data ini.
+Operasi searching (pencarian) adalah salah satu operasi dasar paling penting dalam singly linked list. Karena linked list tidak mendukung akses acak (seperti akses via indeks pada array), satu-satunya metode pencarian yang dapat diimplementasikan secara efisien adalah pencarian linear (atau linear search). Algoritma pencarian linear bekerja dengan cara mengunjungi atau melintasi (traversing) setiap node satu per satu, dimulai dari node first. Proses ini menggunakan sebuah pointer temporer (misalnya current) yang awalnya diinisialisasi ke first. Kemudian, algoritma masuk ke dalam sebuah perulangan yang akan terus berjalan selama pointer temporer tidak Nil (yang menandakan akhir dari list). Di dalam perulangan, data pada node yang sedang ditunjuk (current->info) dibandingkan dengan nilai X yang dicari. Jika data ditemukan (cocok), perulangan berhenti dan fungsi akan mengembalikan address dari node tersebut. Jika data tidak cocok, pointer temporer akan diperbarui untuk menunjuk ke node berikutnya (current = current->next), dan proses perbandingan diulang. Jika perulangan selesai (mencapai akhir list) tanpa menemukan kecocokan, fungsi akan mengembalikan Nil, menandakan bahwa data tidak ada di dalam list. Operasi pencarian ini menjadi fondasi krusial untuk operasi lain seperti insertAfter, deleteAfter, dan update, karena operasi-operasi tersebut perlu menemukan node atau posisi spesifik terlebih dahulu sebelum dapat dieksekusi.
 
 ## Guided
 
@@ -216,7 +214,7 @@ int main() {
                 searchData(data);
                 break;
             case 0:
-                cout << "Program selesai. Sampai jumpa! 👋\n";
+                cout << "Program selesai \n";
                 break;
             default:
                 cout << "Pilihan tidak valid!\n";
@@ -231,167 +229,14 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/guided1.png)
 
-Bagian pencarian data pada program ini, yang diimplementasikan dalam fungsi searchData, menggunakan algoritma pencarian linear (linear search). Fungsi ini bekerja dengan cara menelusuri (traversing) linked list mulai dari node pertama (head). Ia menggunakan sebuah pointer temporer untuk bergerak dari satu node ke node berikutnya dan sebuah variabel counter (pos) untuk menghitung posisi (dimulai dari 1). Pada setiap node, program akan membandingkan data di dalam node tersebut dengan key (nilai yang dicari). Jika data ditemukan, program akan mencetak pesan yang menunjukkan posisi data tersebut dan menghentikan pencarian. Jika program selesai menelusuri seluruh list (mencapai NULL) tanpa menemukan data, ia akan menampilkan pesan bahwa data tidak ditemukan.
+Program pencarian ini, yang diimplementasikan dalam fungsi searchData, bekerja dengan cara menerima satu nilai integer (key) yang ingin dicari. Fungsi ini akan memulai penelusuran dari node pertama (head) dan bergerak maju satu per satu ke node berikutnya, sambil melacak posisi saat ini (dimulai dari 1). Jika nilai data di node yang sedang diperiksa sama dengan key yang dicari, program akan mencetak pesan sukses yang menyatakan data ditemukan beserta nomor posisinya, lalu pencarian dihentikan. Apabila penelusuran sudah mencapai akhir list (NULL) tanpa menemukan data tersebut, atau jika list-nya memang kosong, program akan menampilkan pesan bahwa data tidak ditemukan.
 
 ### Soal 1
 
 buatlah searcing untuk mencari nama pembeli pada unguided sebelumnya
 
 ```c++
-#include <iostream>
-#include <string>
 
-using namespace std;
-
-struct Pembeli {
-    string nama;
-    string pesanan;
-};
-
-struct Node {
-    Pembeli data;
-    Node* next;
-};
-
-struct Queue {
-    Node* head;
-    Node* tail;
-
-    Queue() {
-        head = nullptr;
-        tail = nullptr;
-    }
-
-    ~Queue() {
-        while (head != nullptr) {
-            Node* temp = head;
-            head = head->next;
-            delete temp;
-        }
-    }
-
-    void tambahAntrian(Pembeli data) {
-        Node* newNode = new Node{data, nullptr};
-        if (tail == nullptr) {
-            head = tail = newNode;
-        } else {
-            tail->next = newNode;
-            tail = newNode;
-        }
-        cout << "Pembeli \"" << data.nama << "\" berhasil ditambahkan ke antrian.\n";
-    }
-
-    void layaniAntrian() {
-        if (head == nullptr) {
-            cout << "Antrian kosong.\n";
-            return;
-        }
-        
-        Node* temp = head;
-        cout << "Melayani \"" << temp->data.nama << "\" dengan pesanan \"" << temp->data.pesanan << "\".\n";
-        
-        head = head->next;
-        if (head == nullptr) {
-            tail = nullptr;
-        }
-        delete temp;
-    }
-
-    void tampilkanAntrian() {
-        if (head == nullptr) {
-            cout << "Antrian kosong!\n";
-            return;
-        }
-
-        cout << "Isi antrian saat ini:\n";
-        Node* temp = head;
-        int nomor = 1;
-        while (temp != nullptr) {
-            cout << nomor << ". Nama: " << temp->data.nama << ", Pesanan: " << temp->data.pesanan << "\n";
-            temp = temp->next;
-            nomor++;
-        }
-    }
-
-    void cariPembeli(string namaCari) {
-        if (head == nullptr) {
-            cout << "Antrian kosong!\n";
-            return;
-        }
-
-        Node* temp = head;
-        int posisi = 1;
-        bool ditemukan = false; 
-
-        while (temp != nullptr) {
-            if (temp->data.nama == namaCari) {
-                cout << "Ditemukan: \"" << temp->data.nama 
-                     << "\" di posisi " << posisi 
-                     << " dengan pesanan \"" << temp->data.pesanan << "\".\n";
-                ditemukan = true;
-            }
-            temp = temp->next; 
-            posisi++;          
-        }
-
-        if (!ditemukan) {
-            cout << "Pembeli \"" << namaCari << "\" tidak ditemukan di antrian.\n";
-        }
-    }
-};
-
-int main() {
-    Queue antrian;
-    int pilihan;
-    
-    while (true) {
-        cout << "\nMENU ANTRIAN\n";
-        cout << "1. Tambah Antrian\n";
-        cout << "2. Layani Antrian\n";
-        cout << "3. Tampilkan Antrian\n";
-        cout << "4. Cari Pembeli\n";   
-        cout << "5. Keluar\n";         
-        cout << "Pilih: ";
-        cin >> pilihan;
-
-        if (pilihan == 5) { 
-            break;
-        }
-
-        switch (pilihan) {
-            case 1:
-            {
-                Pembeli dataPembeli; 
-                cout << "Masukkan nama pembeli: ";
-                cin.ignore(); 
-                getline(cin, dataPembeli.nama);
-                cout << "Masukkan pesanan: ";
-                getline(cin, dataPembeli.pesanan);
-                antrian.tambahAntrian(dataPembeli);
-                break;
-            }
-            case 2:
-                antrian.layaniAntrian();
-                break;
-            case 3:
-                antrian.tampilkanAntrian();
-                break;
-            case 4: 
-            {
-                string namaCari;
-                cout << "Masukkan nama pembeli yang dicari: ";
-                cin.ignore(); 
-                getline(cin, namaCari);
-                antrian.cariPembeli(namaCari);
-                break;
-            }
-            default:
-                cout << "Pilihan tidak valid.\n";
-        }
-    }
-
-    return 0;
-}
 
 ```
 
@@ -399,7 +244,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-Bagian pencarian pada program ini, yang diimplementasikan dalam fungsi cariPembeli, menggunakan algoritma pencarian linear (linear search). Fungsi ini bekerja dengan cara menelusuri (traversing) seluruh antrian dari head (paling depan) sampai ke akhir. Ia menggunakan sebuah pointer temporer untuk bergerak dari satu node ke node berikutnya dan sebuah variabel counter (posisi) untuk menghitung posisi antrian, dimulai dari 1. Pada setiap node, program akan membandingkan nama pembeli di node tersebut dengan nama yang dicari (namaCari). Keunikan dari fungsi ini adalah ia tidak berhenti setelah menemukan kecocokan pertama; ia akan terus mencari hingga akhir antrian. Hal ini memungkinkan program untuk menemukan dan menampilkan semua pembeli yang mungkin memiliki nama yang sama, lengkap dengan posisi antrian dan detail pesanan mereka. Jika setelah menelusuri seluruh antrian tidak ada satupun nama yang cocok, program akan menampilkan pesan bahwa pembeli tidak ditemukan.
+pencarian pada program ini (fungsi searchData) bekerja dengan cara menerima satu nilai integer (key) yang ingin dicari. Fungsi ini akan memulai penelusuran dari node pertama (head) dan bergerak maju satu per satu ke node berikutnya, sambil melacak posisi saat ini (dimulai dari 1). Jika nilai data di node yang sedang diperiksa sama dengan key yang dicari, program akan mencetak pesan sukses yang menyatakan data ditemukan beserta nomor posisinya, lalu pencarian dihentikan. Apabila penelusuran sudah mencapai akhir list (NULL) tanpa menemukan data tersebut, atau jika list-nya memang kosong, program akan menampilkan pesan bahwa data tidak ditemukan.
 
 ### Soal 2
 gunakan latihan pada pertemuan minggun ini dan tambahkan seardhing untuk mencari buku berdasarkan judul, penulis, dan ISBN
@@ -655,10 +500,10 @@ void bersihkanMemori() {
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-Fungsi pencarian (cariBuku) pada program ini menerapkan algoritma pencarian linear (linear search) yang fleksibel. Pertama, program ini mengizinkan pengguna untuk memilih kriteria pencarian: berdasarkan ISBN, Judul, atau Penulis. Setelah pengguna memasukkan kata kunci pencarian (searchTerm), fungsi akan menelusuri (traversing) keseluruhan linked list satu per satu, mulai dari head. Pada setiap node, ia akan membandingkan data buku dengan kata kunci tersebut. Program ini dirancang untuk menemukan dan menampilkan semua data buku yang cocok, sehingga ia tidak berhenti setelah temuan pertama dan akan terus mencari hingga akhir list. Jika tidak ada satupun data yang cocok ditemukan setelah seluruh list diperiksa, program akan menampilkan pesan bahwa buku tidak ditemukan.
+Fungsi pencarian (cariBuku) pada program ini memberikan pengguna tiga pilihan kriteria untuk mencari buku: berdasarkan ISBN, Judul, atau Penulis. Setelah pengguna memilih kriteria dan memasukkan kata kunci pencarian (misalnya, judul "durian runtuh"), program akan melakukan penelusuran (traversal) ke seluruh linked list dari buku pertama (head) hingga buku terakhir. Untuk setiap buku yang ditemui, program akan membandingkan data pada buku tersebut (ISBN, judul, atau penulis) dengan kata kunci yang dicari. Jika terjadi kecocokan, program akan mencetak seluruh detail buku tersebut (ISBN, Judul, dan Penulis) dan melanjutkan pencarian ke buku berikutnya, sehingga program ini dapat menemukan dan menampilkan lebih dari satu hasil jika ada beberapa buku yang sesuai kriteria (misalnya, semua buku karya penulis "nufail"). Apabila program telah memeriksa seluruh daftar dan tidak menemukan satu pun kecocokan, barulah program akan menampilkan pesan bahwa buku tidak ditemukan.
 
 ## Referensi
 
-1. https://www.kodingakademi.id/mengenal-linear-search-algoritma-pencarian-dasar/ (diakses pada 18 Oktober 2025)
-2. https://daismabali.medium.com/metode-searching-dalam-struktur-data-dan-implementasi-pemrogramannya-d97582084866 (diakses pada 18 Oktober 2025)
-3. https://www.kodingakademi.id/pengenalan-searching-dalam-c/ (diakses pada 18 Oktober 2025)
+1. https://www.geeksforgeeks.org/cpp/cpp-program-for-searching-an-element-in-a-linked-list/ (diakses pada 20 Oktober 2025)
+2. https://www.tutorialspoint.com/searching-an-element-in-a-linked-list-using-cplusplus (diakses pada 20 Oktober 2025)
+3. https://www.programiz.com/dsa/linear-search (diakses pada 18 Oktober 2025)
