@@ -236,7 +236,160 @@ Program pencarian ini, yang diimplementasikan dalam fungsi searchData, bekerja d
 buatlah searcing untuk mencari nama pembeli pada unguided sebelumnya
 
 ```c++
+#include <iostream>
+#include <string>
 
+using namespace std;
+
+struct Pembeli {
+    string nama;
+    string pesanan;
+};
+
+struct Node {
+    Pembeli data;
+    Node* next;
+};
+
+struct Queue {
+    Node* head;
+    Node* tail;
+
+    Queue() {
+        head = nullptr;
+        tail = nullptr;
+    }
+
+    ~Queue() {
+        while (head != nullptr) {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+
+    void tambahAntrian(Pembeli data) {
+        Node* newNode = new Node{data, nullptr};
+        if (tail == nullptr) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+        cout << "Pembeli \"" << data.nama << "\" berhasil ditambahkan ke antrian.\n";
+    }
+
+    void layaniAntrian() {
+        if (head == nullptr) {
+            cout << "Antrian kosong.\n";
+            return;
+        }
+        
+        Node* temp = head;
+        cout << "Melayani \"" << temp->data.nama << "\" dengan pesanan \"" << temp->data.pesanan << "\".\n";
+        
+        head = head->next;
+        if (head == nullptr) {
+            tail = nullptr;
+        }
+        delete temp;
+    }
+
+    void tampilkanAntrian() {
+        if (head == nullptr) {
+            cout << "Antrian kosong!\n";
+            return;
+        }
+
+        cout << "Isi antrian saat ini:\n";
+        Node* temp = head;
+        int nomor = 1;
+        while (temp != nullptr) {
+            cout << nomor << ". Nama: " << temp->data.nama << ", Pesanan: " << temp->data.pesanan << "\n";
+            temp = temp->next;
+            nomor++;
+        }
+    }
+
+    void cariPembeli(string namaCari) {
+        if (head == nullptr) {
+            cout << "Antrian kosong!\n";
+            return;
+        }
+
+        Node* temp = head;
+        int posisi = 1;
+        bool ditemukan = false; 
+
+        while (temp != nullptr) {
+            if (temp->data.nama == namaCari) {
+                cout << "Ditemukan: \"" << temp->data.nama 
+                     << "\" di posisi " << posisi 
+                     << " dengan pesanan \"" << temp->data.pesanan << "\".\n";
+                ditemukan = true;
+            }
+            temp = temp->next; 
+            posisi++;          
+        }
+
+        if (!ditemukan) {
+            cout << "Pembeli \"" << namaCari << "\" tidak ditemukan di antrian.\n";
+        }
+    }
+};
+
+int main() {
+    Queue antrian;
+    int pilihan;
+    
+    while (true) {
+        cout << "\nMENU ANTRIAN\n";
+        cout << "1. Tambah Antrian\n";
+        cout << "2. Layani Antrian\n";
+        cout << "3. Tampilkan Antrian\n";
+        cout << "4. Cari Pembeli\n";   
+        cout << "5. Keluar\n";         
+        cout << "Pilih: ";
+        cin >> pilihan;
+
+        if (pilihan == 5) { 
+            break;
+        }
+
+        switch (pilihan) {
+            case 1:
+            {
+                Pembeli dataPembeli; 
+                cout << "Masukkan nama pembeli: ";
+                cin.ignore(); 
+                getline(cin, dataPembeli.nama);
+                cout << "Masukkan pesanan: ";
+                getline(cin, dataPembeli.pesanan);
+                antrian.tambahAntrian(dataPembeli);
+                break;
+            }
+            case 2:
+                antrian.layaniAntrian();
+                break;
+            case 3:
+                antrian.tampilkanAntrian();
+                break;
+            case 4: 
+            {
+                string namaCari;
+                cout << "Masukkan nama pembeli yang dicari: ";
+                cin.ignore(); 
+                getline(cin, namaCari);
+                antrian.cariPembeli(namaCari);
+                break;
+            }
+            default:
+                cout << "Pilihan tidak valid.\n";
+        }
+    }
+
+    return 0;
+}
 
 ```
 
