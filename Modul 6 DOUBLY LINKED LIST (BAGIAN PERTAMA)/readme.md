@@ -2,6 +2,11 @@
 <p align="center"> NUFAIL ALAUDDIN TSAQIF - 103112400084</p>
 
 ## Dasar Teori
+Struktur data adalah metode khusus untuk menyimpan dan mengatur data dalam komputer sehingga dapat digunakan secara efisien, yang sangat penting untuk mengelola data dalam jumlah besar. Salah satu struktur data linear yang fundamental dan dinamis adalah Linked List (Senarai Berantai). Berbeda dengan Array yang menyimpan elemen secara berdekatan di memori, linked list terdiri dari kumpulan node, di mana setiap node menyimpan data dan sebuah pointer (penunjuk) ke alamat memori node berikutnya. Node terakhir akan menunjuk ke NULL, menandakan akhir dari list.
+
+Doubly Linked List (DLL) adalah pengembangan dari Singly Linked List (SLL). Perbedaannya, setiap node pada DLL memiliki tiga bagian: data (info), pointer next yang menunjuk ke node berikutnya, dan pointer prev yang menunjuk ke node sebelumnya. Struktur ini dikelola oleh dua pointer utama, First (Head) dan Last (Tail). Pointer prev pada node pertama dan pointer next pada node terakhir akan menunjuk ke NULL. Keunggulan utama DLL adalah kemampuannya untuk melakukan traversal dua arah (bidirectional traversal), yaitu penelusuran dari depan ke belakang (mengikuti next) dan dari belakang ke depan (mengikuti prev).
+
+Operasi seperti insertion (penyisipan) dan deletion (penghapusan) pada DLL mengharuskan pengaturan ulang pointer prev dan next pada node-node yang terlibat untuk menjaga integritas list. Dibandingkan SLL, kelebihan DLL adalah kemampuan traversal dua arah dan proses penghapusan yang lebih efisien (terutama deleteLast yang menjadi $O(1)$), karena kita dapat dengan mudah menemukan node sebelumnya melalui pointer prev. Namun, kekurangannya adalah kebutuhan memori yang lebih besar untuk menyimpan pointer prev di setiap node dan implementasi operasi yang sedikit lebih kompleks karena lebih banyak pointer yang harus dikelola.
 
 ## Guided
 
@@ -259,6 +264,7 @@ int main() {
 > 
 > ![Screenshot bagian x](OUTPUT/guided1.png)
 
+Program ini adalah implementasi doubly linked list C++ yang lengkap, dikendalikan oleh sebuah menu interaktif yang menggunakan pointer global head dan tail. Program ini menyediakan fungsionalitas CRUD penuh, memungkinkan pengguna untuk menambah data (di depan, belakang, atau setelah data lain), menghapus data (dari depan, belakang, atau data spesifik), serta meng-update nilai data yang ada. Keunggulan utamanya ditunjukkan melalui kemampuan untuk menampilkan seluruh isi list dari dua arah, baik secara maju (dari head ke tail) maupun mundur (dari tail ke head), yang semuanya diatur dalam sebuah loop do-while hingga pengguna memilih untuk keluar.
 
 ## UNGUIDED
 
@@ -354,37 +360,256 @@ void deleteAfter(list &L, address Prec, address &P);
 ```
 #### doublylist.cpp
 ```c++
+#include "Doublylist.h"
+#include <iostream>
+#include <string>
 
+using namespace std;
+
+void hapusKendaraan(list& L, string target) {
+    address P = findElm(L, target);
+    
+    
+    if (P == Nil) { 
+        cout << "data dengan nomor polisi " << target << " tidak ditemukan" << endl;
+        return;
+    }
+
+    
+    if (P == L.First && P == L.Last) {
+        L.First = Nil;
+        L.Last = Nil;
+    } 
+    
+    else if (P == L.First) {
+        L.First = P->next;
+        L.First->prev = Nil;
+    } 
+    
+    else if (P == L.Last) {
+        L.Last = P->prev;
+        L.Last->next = Nil;
+    } 
+    
+    else {
+        P->prev->next = P->next;
+        P->next->prev = P->prev;
+    }
+    
+    cout << "data dengan nomor polisi " << target << " berhasil dihapus" << endl;
+    
+    
+    P->next = Nil;
+    P->prev = Nil;
+    dealokasi(P); 
+}
+
+int main() {
+    list L; 
+    CreateList(L); 
+    address P;
+    infotype data;
+    string target;
+    int pilihan;
+
+    do {
+        cout << "\nMENU\n";
+        cout << "1. masukkan data kendaraan\n";
+        cout << "2. cari data kendaraan\n";
+        cout << "3. hapus data kendaraan\n";
+        cout << "4. tampilkan semua data\n";
+        cout << "0. keluar\n";
+        cout << "pilih menu: ";
+        cin >> pilihan;
+        cin.ignore(); 
+
+        switch (pilihan) {
+            case 1:
+                cout << "masukkan nomor polisi: ";
+                getline(cin, data.nopol);
+                if (findElm(L, data.nopol) != Nil) { 
+                    cout << "nomor polisi sudah terdaftar" << endl;
+                } else {
+                    cout << "masukkan warna kendaraan: ";
+                    getline(cin, data.warna);
+                    cout << "masukkan tahun kendaraan: ";
+                    cin >> data.thnBuat;
+                    cin.ignore(); 
+                    P = alokasi(data);
+                    insertLast(L, P);
+                }
+                break;
+            case 2:
+                cout << "masukkan nomor polisi yang dicari: ";
+                getline(cin, target);
+                P = findElm(L, target);
+                if (P != Nil) { 
+                    cout << "\ndata ditemukan:" << endl;
+                    cout << "nomor polisi: " << P->info.nopol << endl; 
+                    cout << "warna       : " << P->info.warna << endl; 
+                    cout << "tahun       : " << P->info.thnBuat << endl; 
+                } else {
+                    cout << "data tidak ditemukan" << endl;
+                }
+                break;
+            case 3:
+                cout << "masukkan nomor polisi yang akan dihapus: ";
+                getline(cin, target);
+                hapusKendaraan(L, target);
+                break;
+            case 4:
+                cout << "\nDATA :" << endl;
+                printInfo(L);
+                break;
+            case 0:
+                cout << "tengkyuu\n";
+                break;
+            default:
+                cout << "pilihan tidak valid\n";
+        }
+    } while (pilihan != 0);
+
+    return 0;
+}
 ```
 #### main.cpp
 ```c++
+#include "Doublylist.h"
 
+void CreateList(list &L) {
+    L.First = Nil;
+    L.Last = Nil;
+}
+
+address alokasi(infotype x) {
+    address P = new elmlist;
+    P->info = x;
+    P->next = Nil;
+    P->prev = Nil;
+    return P;
+}
+
+void dealokasi(address &P) {
+    delete P;
+}
+
+
+address findElm(list L, string nopol) {
+    address P = L.First;
+    while (P != Nil) {
+        if (P->info.nopol == nopol) {
+            return P;
+        }
+        P = P->next;
+    }
+    return Nil;
+}
+
+void insertLast(list &L, address P) {
+    if (L.First == Nil) {
+        L.First = P;
+        L.Last = P;
+    } else {
+        P->prev = L.Last;
+        L.Last->next = P;
+        L.Last = P;
+    }
+}
+
+void printInfo(list L) {
+    address P = L.First; 
+    if (P == Nil) {
+        cout << "List kosong." << endl;
+        return;
+    }
+    
+    while (P != Nil) {
+        cout << "no polisi: " << P->info.nopol << endl;
+        cout << "warna     : " << P->info.warna << endl;
+        cout << "tahun     : " << P->info.thnBuat << endl;
+        cout << "----------" << endl;
+        P = P->next; 
+    }
+}
+
+void deleteFirst(list &L, address &P) {
+    P = L.First;
+    if (L.First == Nil) {
+        return;
+    }
+    
+    if (L.First == L.Last) {
+        L.First = Nil;
+        L.Last = Nil;
+    } else {
+        L.First = P->next;
+        L.First->prev = Nil;
+        P->next = Nil;
+    }
+}
+
+void deleteLast(list &L, address &P) {
+    P = L.Last;
+    if (L.First == Nil) {
+        return;
+    }
+    
+    if (L.First == L.Last) {
+        L.First = Nil;
+        L.Last = Nil;
+    } else {
+        L.Last = P->prev;
+        L.Last->next = Nil;
+        P->prev = Nil;
+    }
+}
+
+void deleteAfter(list &L, address Prec, address &P) {
+    
+    if (Prec == Nil || Prec->next == Nil) {
+        P = Nil;
+        return;
+    }
+    
+    if (Prec->next == L.Last) {
+        deleteLast(L, P);
+    } else {
+        P = Prec->next;
+        address Succ = P->next;
+        Prec->next = Succ;
+        Succ->prev = Prec;
+        P->next = Nil;
+        P->prev = Nil;
+    }
+}
 ```
 #### OUTPUT & DEKSRIPSI PROGRAM
 > Output soal 1
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1.1.png)
-> ![Screenshot bagian x](OUTPUT/unfuided1.2.png)
+> ![Screenshot bagian x](OUTPUT/unguided1.2.png)
+> ![Screenshot bagian x](OUTPUT/unguided1.3.png)
 
-demonstrasi fungsi penambahan data (Menu 1) dan pengecekan duplikat. Awalnya, pengguna berhasil memasukkan dua data kendaraan: "D001" (hitam, 90) dan "D003" (putih, 70). Kedua data ini dimasukkan ke akhir list. Selanjutnya, program diuji dengan mencoba memasukkan "D001" lagi. Sistem berhasil mendeteksi duplikasi ini dan menampilkan pesan "nomor polisi sudah terdaftar", sehingga data ganda tidak ditambahkan. Setelah itu, pengguna berhasil menambahkan data ketiga, "D004" (kuning, 90). Terakhir, ketika Menu 4 (tampilkan semua data) dipilih, program mencetak seluruh isi list secara berurutan dari awal hingga akhir (sesuai implementasi printInfo yang baru), yaitu D001, diikuti D003, dan terakhir D004.
+
+Porgram ini demonstrasi fungsi penambahan data dan pengecekan duplikat. Awalnya, pengguna berhasil memasukkan dua data kendaraan: "D001" (hitam, 90) dan "D003" (putih, 70). Kedua data ini dimasukkan ke akhir list. Selanjutnya, program diuji dengan mencoba memasukkan "D001" lagi. Sistem berhasil mendeteksi duplikasi ini dan menampilkan pesan "nomor polisi sudah terdaftar", sehingga data ganda tidak ditambahkan. Setelah itu, pengguna berhasil menambahkan data ketiga, "D004" (kuning, 90). Terakhir, ketika Menu 4 (tampilkan semua data) dipilih, program mencetak seluruh isi list secara berurutan dari awal hingga akhir (sesuai implementasi printInfo yang baru), yaitu D001, diikuti D003, dan terakhir D004.
 
 > Output soal 2
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-menunjukkan pengguna memilih menu 2, yaitu "cari data kendaraan". Program kemudian merespons dengan meminta "masukkan nomor polisi yang dicari:", dan pengguna mengetikkan D001 sebagai target pencarian. Ini memicu pemanggilan fungsi P = findElm(L, target). Fungsi findElm kemudian menelusuri list mulai dari L.First ke depan, membandingkan P->info.nopol dengan target "D001". Karena data "D001" (yang dimasukkan pada gambar unguided1.1.png) ditemukan dalam list, fungsi findElm mengembalikan address P dari node tersebut, yang berarti P tidak Nil. Akibatnya, kondisi if (P != Nil) di main.cpp terpenuhi, dan program mencetak "data ditemukan:" diikuti oleh rincian data yang tersimpan di P->info, yaitu nomor polisi D001, warna hitam, dan tahun 90.
+Program ini menunjukkan cara kerja fungsi pencarian data (Menu 2). Pengguna memilih menu 2 dan memasukkan nomor polisi "D001" sebagai target yang ingin dicari. Program kemudian menelusuri list dari awal, berhasil menemukan data tersebut, dan segera menampilkan semua informasi yang terkait dengannya: "nomor polisi: D001", "warna: hitam", dan "tahun: 90". Ini membuktikan bahwa fungsi pencarian (findElm) bekerja dengan akurat.
 
 > Output soal 3
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 > 
-ini mendemonstrasikan eksekusi dari menu 3, yaitu "hapus data kendaraan". Pengguna diminta untuk memasukkan nomor polisi yang akan dihapus, dan mereka mengetikkan D004. Ini memanggil fungsi hapusKendaraan dengan target "D004". Fungsi ini pertama-tama menggunakan findElm untuk menemukan node yang berisi "D004". Berdasarkan konteks dari gambar sebelumnya, "D004" adalah data terakhir yang dimasukkan, sehingga ia adalah L.Last dalam list. Karena node ini bukan elemen pertama (L.First), fungsi hapusKendaraan mengambil node sebelumnya (precNode, yaitu "D003") dan memanggil deleteAfter(L, precNode, temp). Di dalam deleteAfter, program mendeteksi bahwa node yang akan dihapus (Prec->next) adalah L.Last, sehingga ia memanggil fungsi deleteLast(L, temp). deleteLast kemudian memperbarui L.Last untuk menunjuk ke node "D003", mengatur pointer next dari "D003" menjadi Nil, dan mengembalikan node "D004" yang telah terputus. Akhirnya, hapusKendaraan mencetak pesan sukses "data dengan nomor polisi D004 berhasil dihapus" dan memanggil dealokasi(temp) untuk membebaskan memori node tersebut.
+Output ketiga adalah demonstrasi dari fungsi penghapusan data (Menu 3). Pengguna memilih untuk menghapus data dan memasukkan nomor polisi "D003". Pada titik ini, "D003" berada di tengah list (setelah D001 dan sebelum D004). Program memanggil fungsi hapusKendaraan, yang kemudian menemukan node "D003", mengatur ulang pointer dari node D001 dan D004 untuk menyambung kembali list, dan akhirnya menghapus node D003. Program kemudian memberikan pesan konfirmasi "data dengan nomor polisi D003 berhasil dihapus".
 
 
 
 
 ## Referensi
 
-1. https://www.geeksforgeeks.org/cpp/doubly-linked-list-in-cpp/ (diakses pada 23 Oktober 2025)
-2. https://www.programiz.com/dsa/doubly-linked-list (diakses pada 23 Oktober 2025)
-3. https://www.tutorialspoint.com/cplusplus-program-to-implement-doubly-linked-list (diakses pada 23 Oktober 2025)
+1. https://www.scaler.com/topics/doubly-linked-list-cpp/ (diakses pada 24 Oktober 2025)
+2. https://daismabali.medium.com/memahami-doubly-linked-list-dalam-struktu-data-dengan-mudah-e9192a3fbacd (diakses pada 24 Oktober 2025)
+3. https://www.tutorialspoint.com/data_structures_algorithms/doubly_linked_list_algorithm.htm (diakses pada 24 Oktober 2025)
