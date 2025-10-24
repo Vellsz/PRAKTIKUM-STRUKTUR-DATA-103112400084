@@ -597,13 +597,13 @@ Porgram ini demonstrasi fungsi penambahan data dan pengecekan duplikat. Awalnya,
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 
-Program ini menunjukkan cara kerja fungsi pencarian data (Menu 2). Pengguna memilih menu 2 dan memasukkan nomor polisi "D001" sebagai target yang ingin dicari. Program kemudian menelusuri list dari awal, berhasil menemukan data tersebut, dan segera menampilkan semua informasi yang terkait dengannya: "nomor polisi: D001", "warna: hitam", dan "tahun: 90". Ini membuktikan bahwa fungsi pencarian (findElm) bekerja dengan akurat.
+Program ini menunjukkan cara kerja fungsi pencarian data. Pengguna memilih menu 2 dan memasukkan nomor polisi "D001" sebagai target yang ingin dicari. Program kemudian menelusuri list dari awal, berhasil menemukan data tersebut, dan segera menampilkan semua informasi yang terkait dengannya: "nomor polisi: D001", "warna: hitam", dan "tahun: 90". Ini membuktikan bahwa fungsi pencarian (findElm) bekerja dengan akurat.
 
 > Output soal 3
 > 
 > ![Screenshot bagian x](OUTPUT/unguided2.png)
 > 
-Output ketiga adalah demonstrasi dari fungsi penghapusan data (Menu 3). Pengguna memilih untuk menghapus data dan memasukkan nomor polisi "D003". Pada titik ini, "D003" berada di tengah list (setelah D001 dan sebelum D004). Program memanggil fungsi hapusKendaraan, yang kemudian menemukan node "D003", mengatur ulang pointer dari node D001 dan D004 untuk menyambung kembali list, dan akhirnya menghapus node D003. Program kemudian memberikan pesan konfirmasi "data dengan nomor polisi D003 berhasil dihapus".
+Output ketiga adalah demonstrasi dari fungsi penghapusan data. Pengguna memilih untuk menghapus data dan memasukkan nomor polisi "D003". Pada titik ini, "D003" berada di tengah list (setelah D001 dan sebelum D004). Program memanggil fungsi hapusKendaraan, yang kemudian menemukan node "D003", mengatur ulang pointer dari node D001 dan D004 untuk menyambung kembali list, dan akhirnya menghapus node D003. Program kemudian memberikan pesan konfirmasi "data dengan nomor polisi D003 berhasil dihapus".
 
 
 
