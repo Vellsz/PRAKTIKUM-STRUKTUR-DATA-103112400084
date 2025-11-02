@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul 6 <br>STACK</h1>
+# <h1 align="center">Laporan Praktikum Modul 7 <br>STACK</h1>
 <p align="center">NUFAIL ALAUDDIN TSAQID - 103112400084</p>
 
 ## Dasar Teori
