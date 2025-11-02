@@ -1,5 +1,5 @@
 # <h1 align="center">Laporan Praktikum Modul 7 <br>STACK</h1>
-<p align="center">NUFAIL ALAUDDIN TSAQID - 103112400084</p>
+<p align="center">NUFAIL ALAUDDIN TSAQIF - 103112400084</p>
 
 ## Dasar Teori
 Stack (tumpukan) adalah salah satu bentuk struktur data linear yang beroperasi dengan prinsip LIFO (Last In First Out); elemen yang terakhir kali dimasukkan adalah elemen yang pertama kali akan diambil. Semua operasi, baik penyisipan maupun pengambilan, hanya dapat dilakukan pada satu ujung yang disebut "Top". Terdapat dua cara utama untuk mengimplementasikan stack: representasi pointer (linked list) dan representasi tabel (array). Pada implementasi pointer, setiap elemen (elmStack) berisi data (info) dan pointer (next) ke elemen di bawahnya , dengan stack utama hanya menyimpan pointer Top. Pada implementasi tabel, stack menggunakan array dengan ukuran terbatas, di mana sebuah indeks Top melacak posisi data teratas, dan stack dinyatakan kosong saat Top bernilai 0.
