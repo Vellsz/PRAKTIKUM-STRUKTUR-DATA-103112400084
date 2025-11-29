@@ -1,12 +1,14 @@
 # <h1 align="center">Laporan Praktikum Modul 10 <br>TREE</h1>
-<p align="center">MOHAMMAD REYHAN ARETHA FATIN - 103112400078</p>
+<p align="center">NUFAIL ALAUDDIN TSAQIF - 103112400084</p>
 
 ## Dasar Teori
-Rekursif didefinisikan sebagai suatu proses pengulangan dengan cara kesamaan diri, di mana sebuah fungsi atau prosedur memanggil dirinya sendiri. Dalam pemrograman, penggunaan sub-program rekursif memberikan manfaat berupa peningkatan readability (keterbacaan), modularity (pemecahan masalah menjadi modul kecil), dan reusability (penggunaan ulang tanpa penulisan ulang perintah). Agar tidak terjadi pengulangan tanpa henti (infinite loop), sebuah fungsi rekursif harus memenuhi dua kriteria utama: memiliki kondisi khusus (base case) yang menyebabkan pemanggilan berhenti, dan instruksi pemanggilan diri sendiri ketika kondisi khusus belum terpenuhi. Meskipun sering kali menghasilkan kode yang lebih singkat dan mudah dipahami, rekursif memiliki kekurangan yaitu membutuhkan memori lebih banyak untuk activation record dan waktu eksekusi yang lebih lama dibandingkan metode iteratif.
+Tree merupakan salah satu struktur data non-linear yang terdiri dari sekumpulan elemen yang disebut node dan dihubungkan oleh cabang atau edge. Dalam sebuah tree, terdapat satu node khusus yang disebut root (akar), yaitu node tertinggi yang tidak memiliki parent, sedangkan node lainnya dapat memiliki satu parent dan beberapa child. Node yang tidak memiliki child disebut leaf (daun). Struktur tree digunakan untuk merepresentasikan data yang bersifat hierarkis, seperti struktur organisasi, sistem file, atau proses pengambilan keputusan.
 
-Struktur data Tree (pohon) adalah struktur data non-linear yang digambarkan sebagai graf tak berarah yang terhubung dan tidak mengandung sirkuit. Karakteristik utama dari tree meliputi adanya satu node tanpa pendahulu yang disebut akar (root), sementara node lainnya hanya memiliki satu pendahulu (parent). Terminologi penting dalam tree antara lain Leaf (daun) yang merupakan node berderajat nol, Internal Nodes (simpul dalam) yang memiliki anak, serta Height (tinggi) atau Depth (kedalaman) yang menunjukan jumlah maksimum node pada cabang tree tersebut. Terdapat berbagai jenis tree, salah satunya adalah Binary Tree di mana setiap node maksimal hanya memiliki dua anak.
+Salah satu bentuk khusus dari tree adalah Binary Tree, yaitu tree di mana setiap node hanya memiliki maksimal dua anak, yaitu left child dan right child. Dari Binary Tree ini berkembang konsep Binary Search Tree (BST), yaitu tree dengan aturan bahwa nilai di subtree kiri selalu lebih kecil dari nilai root, sedangkan nilai di subtree kanan selalu lebih besar. BST memudahkan proses pencarian (search), penyisipan (insert), dan penghapusan (delete) data secara efisien.
 
-Salah satu implementasi penting dari Binary Tree adalah Binary Search Tree (BST). BST adalah binary tree yang terurut dengan aturan ketat: semua nilai pada Left Child (sub-pohon kiri) harus lebih kecil dari parent-nya, dan semua nilai pada Right Child (sub-pohon kanan) harus lebih besar dari parent-nya. Aturan ini memungkinkan operasi pencarian (search), penambahan (insert), dan penghapusan (delete) dilakukan dengan efisien. Selain itu, penelusuran data (traversal) pada tree dapat dilakukan dengan tiga metode utama: Pre-order (Root-Left-Right), In-order (Left-Root-Right), dan Post-order (Left-Right-Root).
+Dalam pengolahan Binary Tree juga dikenal beberapa jenis penelusuran atau traversal, yaitu pre-order, in-order, dan post-order. Traversal pre-order mengunjungi root terlebih dahulu, kemudian subtree kiri dan kanan. Traversal in-order mengunjungi subtree kiri, kemudian root, lalu subtree kanan — metode ini sering digunakan untuk mendapatkan data dalam urutan terurut. Sementara traversal post-order mengunjungi subtree kiri dan kanan terlebih dahulu sebelum root.
+
+Selain itu, penerapan tree sering memanfaatkan fungsi rekursif, yaitu fungsi yang memanggil dirinya sendiri untuk menyelesaikan submasalah yang lebih kecil. Penggunaan rekursif dalam tree mempermudah implementasi operasi traversal maupun pencarian, karena setiap node dapat diproses dengan pola pemanggilan yang sama terhadap subtree-nya. Dengan memahami konsep tree, binary tree, serta penerapan rekursif di dalamnya, kita dapat membangun struktur data yang efisien untuk berbagai aplikasi dalam pemrograman.
 ## Guided
 
 ### Guided 1
@@ -204,31 +206,152 @@ int main()
 > 
 > ![Screenshot bagian x](OUTPUT/guided1.png)
 
-Program ini adalah implementasi BST komprehensif dalam satu file tunggal yang menyediakan fitur lengkap CRUD (Create, Read, Update, Delete). Keunggulannya terletak pada penanganan logika yang lebih kompleks, seperti pencarian data, pembaruan nilai (dengan metode hapus lalu sisip ulang), serta algoritma penghapusan node yang mampu menangani berbagai kondisi anak (leaf, satu anak, atau dua anak).
+Program ini merupakan implementasi lengkap struktur data Binary Search Tree (BST) dalam bahasa C++ yang mencakup operasi manajemen data secara menyeluruh (CRUD). Selain fitur dasar penyisipan (insert) yang menjaga urutan nilai dan pencarian (search) , kode ini dilengkapi dengan mekanisme penghapusan (delete) yang mampu menangani tiga skenario kompleks: menghapus node daun, node dengan satu anak, dan node dengan dua anak menggunakan metode successor (nilai terkecil di subtree kanan) . Fitur pembaruan (update) diimplementasikan secara aman dengan cara menghapus nilai lama terlebih dahulu kemudian menyisipkan nilai baru untuk mencegah kerusakan struktur pohon , di mana hasil akhirnya dapat diverifikasi melalui tiga metode penelusuran (traversal) yaitu Pre-Order, In-Order, dan Post-Order .
 
 ## UNGUIDED
 
 #### bstree.h
 ```c++
+#ifndef BSTREE_H
+#define BSTREE_H
+#include <iostream>
 
+using namespace std;
+
+typedef int infotype;
+typedef struct Node *address;
+
+struct Node {
+    infotype info;
+    address left;
+    address right;
+};
+
+address alokasi(infotype x);
+void insertNode(address &root, infotype x);
+void printInorder(address root);
+void printPreorder(address root);
+void printPostorder(address root);
+
+int hitungJumlahNode(address root);
+int hitungTotalInfo(address root);
+int hitungKedalaman(address root);
+
+#endif
 ```
 #### bstree.cpp
 ```c++
+#include "bstree.h"
 
+address alokasi(infotype x) {
+    address P = new Node;
+    if (P != NULL) {
+        P->info = x;
+        P->left = NULL;
+        P->right = NULL;
+    }
+    return P;
+}
+
+void insertNode(address &root, infotype x) {
+    if (root == NULL) {
+        root = alokasi(x);
+    } else {
+        if (x < root->info)
+            insertNode(root->left, x);
+        else if (x > root->info)
+            insertNode(root->right, x);
+    }
+}
+void printInorder(address root) {
+    if (root == NULL) return;
+    printInorder(root->left);
+    cout << root->info << " ";
+    printInorder(root->right);
+}
+
+void printPreorder(address root) {
+    if (root == NULL) return;
+    cout << root->info << " ";
+    printPreorder(root->left);
+    printPreorder(root->right);
+}
+
+void printPostorder(address root) {
+    if (root == NULL) return;
+    printPostorder(root->left);
+    printPostorder(root->right);
+    cout << root->info << " ";
+}
+
+int hitungJumlahNode(address root) {
+    return (root == NULL) ? 0 : 1 + hitungJumlahNode(root->left) + hitungJumlahNode(root->right);
+}
+
+int hitungTotalInfo(address root) {
+    return (root == NULL) ? 0 : root->info + hitungTotalInfo(root->left) + hitungTotalInfo(root->right);
+}
+
+int hitungKedalaman(address root) {
+    if (root == NULL) return 0;
+    int lDepth = hitungKedalaman(root->left);
+    int rDepth = hitungKedalaman(root->right);
+    return 1 + ((lDepth > rDepth) ? lDepth : rDepth);
+}
 ```
 #### main.cpp
 ```c++
+#include <iostream>
+#include "bstree.h"
+#include "bstree.cpp" 
 
+using namespace std;
+
+int main() {
+    address root = NULL;
+
+    insertNode(root, 1);
+    insertNode(root, 2);
+    insertNode(root, 6);
+    insertNode(root, 4);
+    insertNode(root, 5);
+    insertNode(root, 3);
+    insertNode(root, 6); 
+    insertNode(root, 7);
+
+    cout << "Hello World" << endl << endl;
+    
+    cout << "";
+    printInorder(root);
+    cout << endl << endl;
+
+    cout << "Hasil Latihan 2" << endl;
+    cout << "Kedalaman Tree : " << hitungKedalaman(root) << endl;
+    cout << "Jumlah Node    : " << hitungJumlahNode(root) << endl;
+    cout << "Total Info     : " << hitungTotalInfo(root) << endl;
+    cout << endl;
+
+    cout << "Hasil Latihan 3" << endl;
+    cout << "Pre-Order  : ";
+    printPreorder(root);
+    cout << endl;
+    
+    cout << "Post-Order : ";
+    printPostorder(root);
+    cout << endl;
+
+    return 0;
+}
 ```
 > Output soal 1
 > 
 > ![Screenshot bagian x](OUTPUT/unguided1.png)
 
-Program ini adalah implementasi Binary Search Tree (BST) modular yang membagi kode menjadi tiga file terpisah (header, implementasi, dan main). Fokus utamanya adalah operasi dasar: penyisipan data (insert), tiga jenis penelusuran (traversal), dan fungsi statistik untuk menghitung kedalaman, jumlah node, serta total nilai data dalam tree.
+Program ini mengimplementasikan struktur data Binary Search Tree (BST) menggunakan bahasa C++ dengan representasi linked list, di mana setiap node memiliki pointer ke anak kiri dan kanan . Program mencakup prosedur penyisipan data (insert) secara rekursif yang secara otomatis mengurutkan nilai—menempatkan angka yang lebih kecil di subtree kiri dan yang lebih besar di subtree kanan—serta menyediakan tiga metode penelusuran (traversal) yaitu In-Order, Pre-Order, dan Post-Order untuk menampilkan isi pohon . Selain operasi dasar, program ini juga dilengkapi dengan fungsi rekursif untuk melakukan perhitungan statistik pohon, meliputi penghitungan kedalaman maksimum (height/depth), jumlah total node, dan penjumlahan seluruh nilai data, yang kemudian hasilnya ditampilkan langsung ke layar sesuai dengan urutan data uji pada modul .
 
 
 ## Referensi
 
 1. https://www.geeksforgeeks.org/cpp/cpp-binary-search-tree/ (diakses pada 29 November 2025)
-2. https://www.geeksforgeeks.org/dsa/deletion-in-binary-search-tree/ (diakses pada 29 November 2025)
-3. https://www.geeksforgeeks.org/dsa/tree-traversals-inorder-preorder-and-postorder/ (diakses pada 29 November 2025)
+2. https://www.tutorialspoint.com/data_structures_algorithms/tree_data_structure.htm (diakses pada 29 November 2025)
+3. https://www.programiz.com/dsa/binary-search-tree (diakses pada 29 November 2025)
