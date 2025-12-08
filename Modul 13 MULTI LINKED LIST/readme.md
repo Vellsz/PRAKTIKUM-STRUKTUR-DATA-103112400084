@@ -136,7 +136,7 @@ int main()
 > ![Screenshot bagian x](OUTPUT/guided1.png)
 program menampilkan struktur Multi Linked List sederhana yang terdiri dari dua node induk (Parent Node 1 dan Parent Node 2). Parent Node 1 memiliki dua anak, yaitu Child Node A dan Child Node B, sedangkan Parent Node 2 memiliki satu anak, yaitu Child Node C. Hasil ini menunjukkan bagaimana list induk dapat menyimpan referensi ke beberapa list anak secara terpisah, menggambarkan hubungan satu ke banyak antar data.
 
-## UNGUIDED 1
+## UNGUIDED 
 1. Perhatikan program 46 multilist.h, buat multilist.cpp untuk implementasi semua fungsi pada 
 multilist.h. Buat main.cpp untuk pemanggilan fungsi-fungsi tersebut.
 
